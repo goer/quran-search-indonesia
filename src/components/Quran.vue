@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-app-bar app color="elevation-0">
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
-      <v-toolbar-title>Quran Search</v-toolbar-title>
+      <v-toolbar-title>Quran Search Indonesia</v-toolbar-title>
       <!-- <v-spacer></v-spacer> -->
       <!-- <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -21,7 +21,8 @@
             label="search"
             v-model="search_keywords"
             append-icon="mdi-search-web"
-            @click:append="search()"
+            @keyup.enter="search()"
+            @click="search()"
           ></v-text-field>
         </v-list-item-content>
       </v-list-item>
@@ -115,6 +116,7 @@ export default {
       });
     },
     async search() {
+      if (!this.search_keywords) return false;
       this.loading = true;
       this.search_results = await this.quran.search(this.search_keywords);
       this.loading = false;
